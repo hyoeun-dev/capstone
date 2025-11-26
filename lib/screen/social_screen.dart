@@ -9,6 +9,7 @@ class SocialScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: SafeArea(child: Column(
         children: [
           Breadcrumbs(korean: '소셜', english: 'social'),

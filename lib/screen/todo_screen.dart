@@ -3,6 +3,7 @@ import 'package:capstone/breadcrumbs.dart';
 import 'package:capstone/colors.dart';
 import 'package:capstone/constants.dart';
 import 'package:capstone/widget/todo_header.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TodoScreen extends StatelessWidget {
@@ -25,6 +26,15 @@ class TodoScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          /// todo 할 일 추가하는 버튼
+        },
+        isExtended: true,
+        backgroundColor: ColorPalette.accentColors['light beige'],
+        shape: CircleBorder(),
+        child: Icon(CupertinoIcons.plus, color: blackColor,),
       ),
     );
   }

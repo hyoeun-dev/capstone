@@ -33,7 +33,7 @@ class TodoOnlineLectureAccordionContent extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: 15),
                   child: Text(
-                    '온라인 강의 듣기',
+                    '도서관 책 반납',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
@@ -54,11 +54,11 @@ class TodoOnlineLectureAccordionContent extends StatelessWidget {
                         Align(
                           alignment: Alignment.topLeft,
                           child: RichText(text: TextSpan(children: [
-                            TextSpan(text: '· 강의만 다운받기\n\n', style: TextStyle(
+                            TextSpan(text: '· 객체지향 UI 디자인 반납\n\n', style: TextStyle(
                               color: blackColor,
                               fontSize: 16,
                             )),
-                            TextSpan(text: '· 강의 링크: https://', style: TextStyle(
+                            TextSpan(text: '· 파이썬 첫걸음 반납', style: TextStyle(
                               color: blackColor,
                               fontSize: 16,
                             )),
@@ -86,7 +86,7 @@ class TodoOnlineLectureAccordionContent extends StatelessWidget {
         },);
       },
       child: TodoAccordionContents(
-        title: '온라인 강의 듣기',
+        title: '도서관 책 반납',
         plannedDateTime: DateTime(2025, 11, 5),
         dueDateTime: now.add(Duration(days: 1)),
         isBottomPaddingRequired: true,
