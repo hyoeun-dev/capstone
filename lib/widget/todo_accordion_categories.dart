@@ -1,22 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AccordionCategories extends StatefulWidget {
+class TodoAccordionCategories extends StatefulWidget {
   final String title;
   final List<Widget> contentsList;
-  const AccordionCategories({super.key, required this.title, required this.contentsList});
+  const TodoAccordionCategories({super.key, required this.title, required this.contentsList});
 
   @override
-  State<AccordionCategories> createState() => _AccordionCategoriesState();
+  State<TodoAccordionCategories> createState() => _TodoAccordionCategoriesState();
 }
 
-class _AccordionCategoriesState extends State<AccordionCategories> {
+class _TodoAccordionCategoriesState extends State<TodoAccordionCategories> {
   bool _customTileExpanded = false;
 
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-      tilePadding: EdgeInsets.all(0),
+      tilePadding: EdgeInsets.zero,
       title: Text(widget.title),
       shape: Border.fromBorderSide(BorderSide.none),
       /// todo trailing 없앨 경우 애니메이션 자동 적용됨 아이콘 사이즈 키울 필요 있음

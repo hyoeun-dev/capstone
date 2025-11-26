@@ -1,17 +1,16 @@
 import 'package:capstone/constants.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
-class AccordionContents extends StatefulWidget {
+class ArchiveAccordionContents extends StatefulWidget {
   final String title;
   final VoidCallback onTap;
-  const AccordionContents({super.key, required this.title, required this.onTap});
+  const ArchiveAccordionContents({super.key, required this.title, required this.onTap});
 
   @override
-  State<AccordionContents> createState() => _AccordionContentsState();
+  State<ArchiveAccordionContents> createState() => _ArchiveAccordionContentsState();
 }
 
-class _AccordionContentsState extends State<AccordionContents> {
+class _ArchiveAccordionContentsState extends State<ArchiveAccordionContents> {
   bool _isFavorites = false;
 
   @override

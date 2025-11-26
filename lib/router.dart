@@ -5,9 +5,9 @@ import 'package:capstone/screen/setting_screen.dart';
 import 'package:capstone/screen/social/social_challenge_screen.dart';
 import 'package:capstone/screen/social/social_search_screen.dart';
 import 'package:capstone/screen/social_screen.dart';
-import 'package:capstone/screen/todo/todo_search_screen.dart';
 import 'package:capstone/screen/todo_screen.dart';
 import 'package:capstone/search/archive_search.dart';
+import 'package:capstone/search/todo_search.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:capstone/capstone_bottom_navigation_bar.dart';
@@ -47,7 +47,7 @@ final _router = GoRouter(
               routes: [
                 GoRoute(
                   path: 'search',
-                  builder: (context, state) => TodoSearchScreen(),
+                  builder: (context, state) => TodoSearch(),
                 ),
               ],
             ),

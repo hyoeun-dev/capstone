@@ -22,7 +22,7 @@ class AccordionContentsHeader extends StatelessWidget {
           BlocBuilder<TagDropdownCubit, TagDropdownState>(
             builder: (context, state) {
               return Container(
-                margin: EdgeInsets.only(right: 8),
+                margin: EdgeInsets.only(right: 10),
                 decoration: BoxDecoration(border: Border.all()),
                 child: DropdownButton(
                   value: context.watch<TagDropdownCubit>().state.selectedTag,

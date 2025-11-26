@@ -1,26 +1,26 @@
 import 'package:capstone/colors.dart';
-import 'package:capstone/widget/accordion_categories.dart';
-import 'package:capstone/widget/accordion_contents.dart';
+import 'package:capstone/widget/archive_accordion_categories.dart';
+import 'package:capstone/widget/archive_accordion_contents.dart';
 import 'package:capstone/widget/accordion_contents_header.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Accordion extends StatefulWidget {
-  const Accordion({super.key});
+class ArchiveAccordion extends StatefulWidget {
+  const ArchiveAccordion({super.key});
 
   @override
-  State<Accordion> createState() => _AccordionState();
+  State<ArchiveAccordion> createState() => _ArchiveAccordionState();
 }
 
-class _AccordionState extends State<Accordion> {
+class _ArchiveAccordionState extends State<ArchiveAccordion> {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        AccordionCategories(
+        ArchiveAccordionCategories(
           title: '취업',
           contentsList: [
-            AccordionContents(
+            ArchiveAccordionContents(
               title: '취업 지원 혜택 모음집',
               onTap: () async {
                 await showDialog(
@@ -93,19 +93,19 @@ class _AccordionState extends State<Accordion> {
               },
             ),
 
-            AccordionContents(title: '이력서에 넣을 경험 정리', onTap: () {}),
-            AccordionContents(title: '포트폴리오 템플릿', onTap: () {}),
+            ArchiveAccordionContents(title: '이력서에 넣을 경험 정리', onTap: () {}),
+            ArchiveAccordionContents(title: '포트폴리오 템플릿', onTap: () {}),
           ],
         ),
-        AccordionCategories(
+        ArchiveAccordionCategories(
           title: '자기관리',
-          contentsList: [AccordionContents(title: '읽고 싶은 책 리스트', onTap: () {})],
+          contentsList: [ArchiveAccordionContents(title: '읽고 싶은 책 리스트', onTap: () {})],
         ),
-        AccordionCategories(
+        ArchiveAccordionCategories(
           title: '쇼핑',
-          contentsList: [AccordionContents(title: '화장품 정보', onTap: () {})],
+          contentsList: [ArchiveAccordionContents(title: '화장품 정보', onTap: () {})],
         ),
-        AccordionCategories(title: '취미', contentsList: []),
+        ArchiveAccordionCategories(title: '취미', contentsList: []),
       ],
     );
   }

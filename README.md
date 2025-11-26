@@ -1,16 +1,11 @@
 # capstone
 
-A new Flutter project.
+## 2025-2학기 캡스톤디자인/협동학습 경진대회 참여작
 
-## Getting Started
+**목표: 제한된 시간 내 DB 고려하지 않은 채 실행 및 보관소 탭 UI/UX 구현**
 
-This project is a starting point for a Flutter application.
+11월 19일 수요일 ~ 11월 24일 월요일
+archive screen 완성
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+11월 25일 화요일 ~ 11월 26일 수요일
+todo screen 임시 완성

@@ -1,8 +1,7 @@
-import 'package:capstone/accordion.dart';
+import 'package:capstone/accordion/archive_accordion.dart';
 import 'package:capstone/breadcrumbs.dart';
 import 'package:capstone/colors.dart';
 import 'package:capstone/constants.dart';
-import 'package:capstone/search/archive_search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -31,7 +30,7 @@ class ArchiveScreen extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.all(kDefaultPadding),
-              child: Accordion(),
+              child: ArchiveAccordion(),
               /// todo 아코디언 컴포넌트 넣기
             ),
           ],

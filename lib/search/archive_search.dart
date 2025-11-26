@@ -1,7 +1,7 @@
 import 'package:capstone/breadcrumbs.dart';
 import 'package:capstone/colors.dart';
 import 'package:capstone/constants.dart';
-import 'package:capstone/widget/archive_search_choices.dart';
+import 'package:capstone/search/archive_search_choices.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
