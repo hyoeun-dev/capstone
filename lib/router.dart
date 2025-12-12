@@ -4,6 +4,7 @@ import 'package:capstone/screen/plan_screen.dart';
 import 'package:capstone/screen/setting_screen.dart';
 import 'package:capstone/screen/social/social_challenge_screen.dart';
 import 'package:capstone/screen/social/social_search_screen.dart';
+import 'package:capstone/screen/social/social_water_challenge.dart';
 import 'package:capstone/screen/social_screen.dart';
 import 'package:capstone/screen/todo_screen.dart';
 import 'package:capstone/search/archive_search.dart';
@@ -98,7 +99,12 @@ final _router = GoRouter(
                 ),
                 GoRoute(
                   path: 'challenge',
-                  builder: (context, state) => SocialChallengeScreen(),
+                  builder: (context, state) => SocialChallengeScreen(
+                    waterPath: '/water',
+                  ),
+                  routes: [
+                    GoRoute(path: 'water', builder: (context, state) => SocialWaterChallenge(),),
+                  ],
                 ),
               ],
             ),

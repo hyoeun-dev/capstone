@@ -11,7 +11,7 @@ class ArchiveAccordionContents extends StatefulWidget {
 }
 
 class _ArchiveAccordionContentsState extends State<ArchiveAccordionContents> {
-  bool _isFavorites = false;
+  bool _isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +27,10 @@ class _ArchiveAccordionContentsState extends State<ArchiveAccordionContents> {
             GestureDetector(
               onTap: () {
                 setState(() {
-                  _isFavorites = !_isFavorites;
+                  _isFavorite = !_isFavorite;
                 });
               },
-              child: _isFavorites ? Icon(CupertinoIcons.star_fill, size: 20,) : Icon(CupertinoIcons.star, size: 20,),
+              child: _isFavorite ? Icon(CupertinoIcons.star_fill, size: 20,) : Icon(CupertinoIcons.star, size: 20,),
             ),
           ],
         ),

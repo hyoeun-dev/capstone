@@ -66,7 +66,7 @@ class _ArchiveAccordionState extends State<ArchiveAccordion> {
                                 children: [
                                   Align(
                                     alignment: Alignment.topLeft,
-                                    child: Text('어떤 식으로 글이 추가되는 걸까요?'),
+                                    child: Text('취업특강 내용 정리'),
                                     /// todo 추가 기획 필요
                                   ),
                                   Align(

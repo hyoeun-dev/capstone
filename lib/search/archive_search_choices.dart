@@ -5,8 +5,8 @@ class ArchiveSearchChoices extends StatefulWidget {
   final String category;
   final List<String> optionList;
   String? selectedValue;
-  bool isFavorites;
-  ArchiveSearchChoices({super.key, required this.category, required this.optionList, required this.selectedValue, required this.isFavorites});
+  bool isFavorite;
+  ArchiveSearchChoices({super.key, required this.category, required this.optionList, required this.selectedValue, required this.isFavorite});
 
   @override
   State<ArchiveSearchChoices> createState() => _ArchiveSearchChoicesState();
@@ -20,16 +20,16 @@ class _ArchiveSearchChoicesState extends State<ArchiveSearchChoices> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          (widget.isFavorites == false) ? Container(
+          (widget.isFavorite == false) ? Container(
             margin: EdgeInsets.only(right: 10),
             child: Text(widget.category, style: TextStyle(color: blackColor, fontSize: 18),),
           ) : SizedBox(),
           Expanded(
             child: Container(
-              padding: (widget.isFavorites == false) ? EdgeInsets.only(left: 10) : EdgeInsets.zero,
+              padding: (widget.isFavorite == false) ? EdgeInsets.only(left: 10) : EdgeInsets.zero,
               alignment: Alignment.topLeft,
               decoration: BoxDecoration(
-                border: (widget.isFavorites == false) ? Border(left: BorderSide()) : Border.fromBorderSide(BorderSide.none),
+                border: (widget.isFavorite == false) ? Border(left: BorderSide()) : Border.fromBorderSide(BorderSide.none),
               ),
               child: Wrap(
                 spacing: 10,

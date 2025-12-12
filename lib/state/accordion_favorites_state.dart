@@ -1,4 +1,4 @@
 class AccordionFavoritesState {
-  bool isFavorites;
-  AccordionFavoritesState({required this.isFavorites});
+  bool isFavorite;
+  AccordionFavoritesState({required this.isFavorite});
 }

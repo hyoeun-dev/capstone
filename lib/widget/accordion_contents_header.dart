@@ -60,7 +60,7 @@ class AccordionContentsHeader extends StatelessWidget {
                   onTap: () {
                     context.read<AccordionFavoritesCubit>().toggleFavorites();
                   },
-                  child: state.isFavorites
+                  child: state.isFavorite
                       ? Icon(
                           CupertinoIcons.star_fill,
                           size: 20,

@@ -17,7 +17,7 @@ class _ArchiveSearchState extends State<ArchiveSearch> {
   List<String> tagOptions = ['취업', '자기관리', '쇼핑', '취미'];
   String? selectedForm;
   List<String> formOptions = ['전체', '사진', '글', '링크'];
-  String? isSelectedFavorites;
+  String? isSelectedFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +43,9 @@ class _ArchiveSearchState extends State<ArchiveSearch> {
                 ),
               ),
             ),
-            ArchiveSearchChoices(category: '태그', optionList: tagOptions, selectedValue: selectedTag, isFavorites: false,),
-            ArchiveSearchChoices(category: '형식', optionList: formOptions, selectedValue: selectedForm, isFavorites: false,),
-            ArchiveSearchChoices(category: '', optionList: ['즐겨찾기'], selectedValue: isSelectedFavorites, isFavorites: true,),
+            ArchiveSearchChoices(category: '태그', optionList: tagOptions, selectedValue: selectedTag, isFavorite: false,),
+            ArchiveSearchChoices(category: '형식', optionList: formOptions, selectedValue: selectedForm, isFavorite: false,),
+            ArchiveSearchChoices(category: '', optionList: ['즐겨찾기'], selectedValue: isSelectedFavorite, isFavorite: true,),
             /*
             Container(
               margin: EdgeInsets.only(left: 8, right: 8, top: 10),

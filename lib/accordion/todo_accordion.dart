@@ -1,30 +1,26 @@
-import 'package:capstone/colors.dart';
-import 'package:capstone/constants.dart';
+import 'package:capstone/accordion/todo_contents_text_field.dart';
 import 'package:capstone/cubit/sorting_dropdown_cubit.dart';
 import 'package:capstone/state/sorting_dropdown_state.dart';
 import 'package:capstone/todo_accordion_contents.dart';
 import 'package:capstone/utils/date_difference.dart';
 import 'package:capstone/utils/date_format.dart';
-import 'package:capstone/widget/archive_accordion_categories.dart';
-import 'package:capstone/widget/archive_accordion_contents.dart';
-import 'package:capstone/widget/accordion_contents_header.dart';
 import 'package:capstone/widget/todo_accordion_categories.dart';
 import 'package:capstone/widget/todo_online_lecture_accordion_content.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 
 class TodoAccordion extends StatefulWidget {
-  const TodoAccordion({super.key});
+  bool isNewContent;
+
+  TodoAccordion({super.key, required this.isNewContent});
 
   @override
   State<TodoAccordion> createState() => _TodoAccordionState();
 }
 
 class _TodoAccordionState extends State<TodoAccordion> {
-
-  @override
+    @override
   Widget build(BuildContext context) {
     DateTime today = DateTime.now();
     DateTime now = DateTime.utc(today.year, today.month, today.day);
@@ -40,7 +36,7 @@ class _TodoAccordionState extends State<TodoAccordion> {
                   now.add(Duration(days: 3)).day,
                 ),
                 contentsList: [
-                  TodoOnlineLectureAccordionContent(now: now,),
+                  TodoOnlineLectureAccordionContent(now: now),
                   TodoAccordionContents(
                     title: '세탁소 방문',
                     plannedDateTime: DateTime(2025, 11, 5),
@@ -75,7 +71,14 @@ class _TodoAccordionState extends State<TodoAccordion> {
                   now.add(Duration(days: 8)).month,
                   now.add(Duration(days: 8)).day,
                 ),
-                contentsList: [],
+                contentsList: [
+                  ?(widget.isNewContent == true)
+                      ? TodoContentsTextField(
+                          plannedDateTime: now.add(Duration(days: 8)),
+                          isBottomPaddingRequired: false,
+                        )
+                      : null,
+                ],
               ),
             ],
           );
@@ -85,7 +88,7 @@ class _TodoAccordionState extends State<TodoAccordion> {
               TodoAccordionCategories(
                 title: 'D${dateDifference(to: now.add(Duration(days: 1)))}',
                 contentsList: [
-                  TodoOnlineLectureAccordionContent(now: now,),
+                  TodoOnlineLectureAccordionContent(now: now),
                   TodoAccordionContents(
                     title: '세탁소 방문',
                     plannedDateTime: DateTime(2025, 11, 5),
@@ -125,7 +128,7 @@ class _TodoAccordionState extends State<TodoAccordion> {
               TodoAccordionCategories(
                 title: '학교',
                 contentsList: [
-                  TodoOnlineLectureAccordionContent(now: now,),
+                  TodoOnlineLectureAccordionContent(now: now),
                   TodoAccordionContents(
                     title: '학술제 참여',
                     plannedDateTime: DateTime(2025, 11, 6),
@@ -134,14 +137,8 @@ class _TodoAccordionState extends State<TodoAccordion> {
                   ),
                 ],
               ),
-              TodoAccordionCategories(
-                title: '친구',
-                contentsList: [],
-              ),
-              TodoAccordionCategories(
-                title: '알바',
-                contentsList: [],
-              ),
+              TodoAccordionCategories(title: '친구', contentsList: []),
+              TodoAccordionCategories(title: '알바', contentsList: []),
             ],
           );
         } else {

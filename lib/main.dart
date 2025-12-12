@@ -1,5 +1,6 @@
 import 'package:capstone/cubit/accordion_choice_chip.dart';
 import 'package:capstone/cubit/accordion_favorites_cubit.dart';
+import 'package:capstone/cubit/social_favorite_cubit.dart';
 import 'package:capstone/cubit/sorting_dropdown_cubit.dart';
 import 'package:capstone/cubit/tag_dropdown_cubit.dart';
 import 'package:capstone/router.dart';
@@ -23,6 +24,7 @@ class Capstone extends StatelessWidget {
         BlocProvider(create: (context) => AccordionFavoritesCubit(),),
         BlocProvider(create: (context) => AccordionChoiceChip(),),
         BlocProvider(create: (context) => SortingDropdownCubit(),),
+        BlocProvider(create: (context) => SocialFavoriteCubit(),),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
