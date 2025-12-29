@@ -92,6 +92,13 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
-  #
+  fonts:
+    - family: BookkGothic
+      fonts:
+        - asset: assets/fonts/BookkGothic_Light.ttf
+          weight: 300
+        - asset: assets/fonts/BookkGothic_Bold.ttf
+          weight: 700
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

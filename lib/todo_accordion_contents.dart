@@ -27,63 +27,62 @@ class _TodoAccordionContentsState extends State<TodoAccordionContents> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          margin: (widget.isBottomPaddingRequired) ? EdgeInsets.only(bottom: kDefaultPadding) : EdgeInsets.zero,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  width: 20,
-                  height: 30,
-                  margin: EdgeInsets.only(left: kDefaultPadding),
-                  child: Checkbox(
-                    value: isChecked,
-                    onChanged: (value) {
-                      setState(() {
-                        isChecked = value!;
-                      });
-                    },
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-                    side: BorderSide(width: 1.2),
-                    checkColor: whiteColor,
-                    activeColor: blackColor,
-                  ),
-                ),
-              ),
-              Column(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width - kDefaultHorizontalPadding * 3 - 20,
-                    height: 25,
-                    margin: EdgeInsets.only(left: kDefaultPadding, right: kDefaultPadding),
-                    alignment: Alignment.centerLeft,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(widget.title, style: TextStyle(fontSize: 18),),
-                        Text('D${dateDifference(to: widget.dueDateTime)}', style: TextStyle(fontSize: 18),),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width - kDefaultHorizontalPadding * 3 - 20,
-                    height: 25,
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      '수행일 ${getShortDate(widget.plannedDateTime.month,widget.plannedDateTime.day)} | 마감일 ${getShortDate(widget.dueDateTime.month,widget.dueDateTime.day)}',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+    return Padding( // Use Padding here for overall spacing
+      padding: EdgeInsets.only(
+        left: kDefaultPadding,
+        right: kDefaultPadding,
+        bottom: widget.isBottomPaddingRequired ? kDefaultPadding : 0,
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center, // Align items centrally
+        children: [
+          SizedBox(
+            width: 24, // Standard checkbox size
+            height: 24,
+            child: Checkbox(
+              value: isChecked,
+              onChanged: (value) {
+                setState(() {
+                  isChecked = value!;
+                });
+              },
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero), // Sharp corners
+              side: BorderSide(width: 1, color: blackColor), // Solid black border
+              checkColor: whiteColor,
+              activeColor: blackColor,
+            ),
           ),
-        ),
-      ],
+          SizedBox(width: kDefaultPadding), // Spacing between checkbox and text
+          Expanded( // Let content take available space
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        widget.title,
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: blackColor),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Text(
+                      'D${dateDifference(to: widget.dueDateTime)}',
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: blackColor),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 4), // Small spacing between title and dates
+                Text(
+                  '수행일 ${getShortDate(widget.plannedDateTime.month,widget.plannedDateTime.day)} | 마감일 ${getShortDate(widget.dueDateTime.month,widget.dueDateTime.day)}',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: blackColor.withAlpha(179)), // Lighter color for dates
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -11,9 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TodoAccordion extends StatefulWidget {
-  bool isNewContent;
+  final bool isNewContent;
 
-  TodoAccordion({super.key, required this.isNewContent});
+  const TodoAccordion({super.key, required this.isNewContent});
 
   @override
   State<TodoAccordion> createState() => _TodoAccordionState();
@@ -41,7 +41,7 @@ class _TodoAccordionState extends State<TodoAccordion> {
                     title: '세탁소 방문',
                     plannedDateTime: DateTime(2025, 11, 5),
                     dueDateTime: now.add(Duration(days: 1)),
-                    isBottomPaddingRequired: false,
+                    isBottomPaddingRequired: true,
                   ),
                 ],
               ),
@@ -55,7 +55,7 @@ class _TodoAccordionState extends State<TodoAccordion> {
                     title: '학술제 참여',
                     plannedDateTime: DateTime(2025, 11, 6),
                     dueDateTime: now.add(Duration(days: 4)),
-                    isBottomPaddingRequired: false,
+                    isBottomPaddingRequired: true,
                   ),
                 ],
               ),
@@ -75,7 +75,7 @@ class _TodoAccordionState extends State<TodoAccordion> {
                   ?(widget.isNewContent == true)
                       ? TodoContentsTextField(
                           plannedDateTime: now.add(Duration(days: 8)),
-                          isBottomPaddingRequired: false,
+                          isBottomPaddingRequired: true,
                         )
                       : null,
                 ],
@@ -93,7 +93,7 @@ class _TodoAccordionState extends State<TodoAccordion> {
                     title: '세탁소 방문',
                     plannedDateTime: DateTime(2025, 11, 5),
                     dueDateTime: now.add(Duration(days: 1)),
-                    isBottomPaddingRequired: false,
+                    isBottomPaddingRequired: true,
                   ),
                 ],
               ),
@@ -104,7 +104,7 @@ class _TodoAccordionState extends State<TodoAccordion> {
                     title: '학술제 참여',
                     plannedDateTime: DateTime(2025, 11, 6),
                     dueDateTime: now.add(Duration(days: 4)),
-                    isBottomPaddingRequired: false,
+                    isBottomPaddingRequired: true,
                   ),
                 ],
               ),
@@ -133,7 +133,7 @@ class _TodoAccordionState extends State<TodoAccordion> {
                     title: '학술제 참여',
                     plannedDateTime: DateTime(2025, 11, 6),
                     dueDateTime: now.add(Duration(days: 4)),
-                    isBottomPaddingRequired: false,
+                    isBottomPaddingRequired: true,
                   ),
                 ],
               ),

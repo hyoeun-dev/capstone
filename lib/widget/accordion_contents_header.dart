@@ -16,37 +16,41 @@ class AccordionContentsHeader extends StatelessWidget {
     List<String> formOptions = ['사진', '글', '링크'];
 
     return SizedBox(
-      height: 25,
+      height: 35, // Increased height for consistency
       child: Row(
         children: [
           BlocBuilder<TagDropdownCubit, TagDropdownState>(
             builder: (context, state) {
               return Container(
                 margin: EdgeInsets.only(right: 10),
-                decoration: BoxDecoration(border: Border.all()),
-                child: DropdownButton(
-                  value: context.watch<TagDropdownCubit>().state.selectedTag,
-                  items: state.tags.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          value,
-                          style: TextStyle(color: blackColor, fontSize: 15),
+                decoration: BoxDecoration(
+                  border: Border.all(color: dividerColor),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton(
+                    value: context.watch<TagDropdownCubit>().state.selectedTag,
+                    items: state.tags.map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            value,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
                         ),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (String? value) {
-                    context.read<TagDropdownCubit>().selectTag(value);
-                  },
-                  hint: Text('태그'),
-                  dropdownColor: whiteColor,
-                 padding: EdgeInsets.symmetric(horizontal: 8),
-                  alignment: Alignment.center,
-                  iconSize: 0,
-
+                      );
+                    }).toList(),
+                    onChanged: (String? value) {
+                      context.read<TagDropdownCubit>().selectTag(value);
+                    },
+                    hint: Text('태그', style: Theme.of(context).textTheme.bodyMedium),
+                    dropdownColor: whiteColor,
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    alignment: Alignment.center,
+                    iconSize: 0,
+                  ),
                 ),
               );
             },
@@ -54,8 +58,11 @@ class AccordionContentsHeader extends StatelessWidget {
           BlocBuilder<AccordionFavoritesCubit, AccordionFavoritesState>(
             builder: (context, state) {
               return Container(
-                padding: EdgeInsets.symmetric(horizontal: 8),
-                decoration: BoxDecoration(border: Border.symmetric(vertical: BorderSide())),
+                padding: EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  border: Border.all(color: dividerColor),
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 child: GestureDetector(
                   onTap: () {
                     context.read<AccordionFavoritesCubit>().toggleFavorites();
@@ -71,45 +78,49 @@ class AccordionContentsHeader extends StatelessWidget {
               );
             },
           ),
-          BlocBuilder<AccordionChoiceChip, String?>(
-            builder: (context, selectedValue) {
-              return Padding(
-                padding: EdgeInsets.only(left: 8),
-                child: Wrap(
-                  spacing: -5,
-                  children: formOptions.map((String itemValue) {
-                    return SizedBox(
-                      height: 25,
-                      child: ChoiceChip(
-                        label: Container(
-                          alignment: Alignment(0, -0.5),
-                          child: Text(itemValue),
+          Expanded(
+            child: BlocBuilder<AccordionChoiceChip, String?>(
+              builder: (context, selectedValue) {
+                return Padding(
+                  padding: EdgeInsets.only(left: 8),
+                  child: Row(
+                    children: formOptions.map((itemValue) {
+                      return Expanded(
+                        child: Container(
+                          height: 35,
+                          margin: EdgeInsets.only(right: itemValue == formOptions.last ? 0 : 5),
+                          child: ChoiceChip(
+                            label: Center(
+                              child: Text(
+                                itemValue,
+                                style: TextStyle(
+                                  color: selectedValue == itemValue ? whiteColor : blackColor,
+                                ),
+                              ),
+                            ),
+                            padding: EdgeInsets.zero,
+                            selectedColor: ColorPalette.accentColors['blue'],
+                            shape: RoundedRectangleBorder(
+                              side: BorderSide(color: dividerColor),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            backgroundColor: whiteColor,
+                            shadowColor: Colors.transparent,
+                            showCheckmark: false,
+                            selected: selectedValue == itemValue,
+                            onSelected: (bool isSelected) {
+                              context.read<AccordionChoiceChip>().selectItem(
+                                itemValue,
+                              );
+                            },
+                          ),
                         ),
-                        padding: EdgeInsets.zero,
-                        materialTapTargetSize: MaterialTapTargetSize.padded,
-                        labelPadding: EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 0,
-                        ),
-                        selectedColor: ColorPalette.accentColors['yellow'],
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(color: blackColor),
-                        ),
-                        backgroundColor: whiteColor,
-                        shadowColor: Colors.transparent,
-                        showCheckmark: false,
-                        selected: selectedValue == itemValue,
-                        onSelected: (bool isSelected) {
-                          context.read<AccordionChoiceChip>().selectItem(
-                            itemValue,
-                          );
-                        },
-                      ),
-                    );
-                  }).toList(),
-                ),
-              );
-            },
+                      );
+                    }).toList(),
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),

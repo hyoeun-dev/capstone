@@ -1,7 +1,5 @@
 import 'package:capstone/colors.dart';
 import 'package:capstone/todo_accordion_contents.dart';
-import 'package:capstone/widget/accordion_contents_header.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TodoOnlineLectureAccordionContent extends StatelessWidget {
@@ -14,10 +12,7 @@ class TodoOnlineLectureAccordionContent extends StatelessWidget {
       onTap: () async {
         await showDialog(context: context, builder: (context) {
           return AlertDialog(
-            backgroundColor: whiteColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadiusGeometry.zero,
-            ),
+            // Rely on global dialogTheme
             title: Row(
               children: [
                 GestureDetector(
@@ -25,8 +20,8 @@ class TodoOnlineLectureAccordionContent extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   child: Icon(
-                    CupertinoIcons.arrow_left,
-                    size: 20,
+                    Icons.arrow_back, // Replaced icon
+                    size: 24,
                     color: blackColor,
                   ),
                 ),
@@ -34,18 +29,14 @@ class TodoOnlineLectureAccordionContent extends StatelessWidget {
                   padding: EdgeInsets.only(left: 15),
                   child: Text(
                     '도서관 책 반납',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                      color: blackColor,
-                    ),
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ),
               ],
             ),
             content: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                /// todo header 필요
                 Expanded(
                   child: Container(
                     margin: EdgeInsets.symmetric(vertical: 20),
@@ -54,14 +45,8 @@ class TodoOnlineLectureAccordionContent extends StatelessWidget {
                         Align(
                           alignment: Alignment.topLeft,
                           child: RichText(text: TextSpan(children: [
-                            TextSpan(text: '· 객체지향 UI 디자인 반납\n\n', style: TextStyle(
-                              color: blackColor,
-                              fontSize: 16,
-                            )),
-                            TextSpan(text: '· 파이썬 첫걸음 반납', style: TextStyle(
-                              color: blackColor,
-                              fontSize: 16,
-                            )),
+                            TextSpan(text: '· 객체지향 UI 디자인 반납\n\n', style: Theme.of(context).textTheme.bodyMedium),
+                            TextSpan(text: '· 파이썬 첫걸음 반납', style: Theme.of(context).textTheme.bodyMedium),
                           ])),
                         ),
                         Align(
@@ -70,10 +55,8 @@ class TodoOnlineLectureAccordionContent extends StatelessWidget {
                             onPressed: () {
                               /// todo 공유 바텀시트 띄우기
                             },
-                            isExtended: true,
-                            shape: CircleBorder(),
-                            backgroundColor: ColorPalette.accentColors['light beige'],
-                            child: Icon(CupertinoIcons.person_2_fill, color: blackColor,),
+                            // Rely on global floatingActionButtonTheme
+                            child: Icon(Icons.share, color: blackColor), // Replaced icon
                           ),
                         ),
                       ],

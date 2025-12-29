@@ -1,9 +1,7 @@
 import 'package:capstone/breadcrumbs.dart';
 import 'package:capstone/colors.dart';
-import 'package:capstone/screen/social/social_challenge_screen.dart';
 import 'package:capstone/widget/social_feed.dart';
 import 'package:capstone/widget/social_friends_list.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,29 +15,22 @@ class SocialScreen extends StatelessWidget {
     List<String> nameList = ['곽규빈', '이효은', '이수빈', '홍길동', '김철수'];
 
     return Scaffold(
-      backgroundColor: whiteColor,
       body: SafeArea(child: SingleChildScrollView(
         physics: ClampingScrollPhysics(),
         child: Column(
           children: [
             Align(alignment: Alignment.centerLeft, child: Breadcrumbs(korean: '소셜', english: 'social')),
-            Padding(padding: EdgeInsets.only(top: 3)),
+            Divider(color: blackColor, thickness: 1), // Divider
             Container(
-              padding: EdgeInsets.only(bottom: 10),
-              decoration: BoxDecoration(
-                border: Border(bottom: BorderSide(color: dividerColor)),
-              ),
+              padding: EdgeInsets.symmetric(vertical: 10),
               child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Row(
-                    spacing: 20,
-                    children: List.generate(5, (index) {
-                      return SocialFriendsList(name: nameList[index]);
-                    },),
-                  ),
+                  ...List.generate(5, (index) {
+                    return SocialFriendsList(name: nameList[index]);
+                  }),
                   Column(
                     children: [
-                      Icon(CupertinoIcons.arrow_right),
+                      Icon(Icons.arrow_forward), // Replaced Cupertino icon
                       Padding(padding: EdgeInsets.only(bottom: 3)),
                       Text('더보기')
                     ],
@@ -47,6 +38,7 @@ class SocialScreen extends StatelessWidget {
                 ],
               ),
             ),
+            Divider(color: blackColor, thickness: 1), // Divider
             Column(
               children: [
                 SocialFeed(name: nameList[0], title: '정보서비스기획 과제', index: 0, isLastContent: false, heartIndex: 0, days: 10,),
@@ -61,10 +53,7 @@ class SocialScreen extends StatelessWidget {
       )),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.go('/social/challenge'),
-        isExtended: true,
-        backgroundColor: ColorPalette.accentColors['light beige'],
-        shape: CircleBorder(),
-        child: Icon(CupertinoIcons.rosette, color: blackColor,),
+        child: Icon(Icons.military_tech, color: blackColor), // Replaced Cupertino icon and set color
       ),
     );
   }

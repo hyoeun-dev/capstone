@@ -4,69 +4,71 @@ import 'package:flutter/material.dart';
 class TodoSearchChoices extends StatefulWidget {
   final String category;
   final List<String> optionList;
-  String? selectedValue;
-  TodoSearchChoices({super.key, required this.category, required this.optionList, required this.selectedValue});
+  final String? selectedValue;
+  const TodoSearchChoices({super.key, required this.category, required this.optionList, this.selectedValue});
 
   @override
   State<TodoSearchChoices> createState() => _TodoSearchChoicesState();
 }
 
 class _TodoSearchChoicesState extends State<TodoSearchChoices> {
+  String? _selectedValue;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedValue = widget.selectedValue;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: 8, right: 8, top: 10),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
+            width: 50,
             margin: EdgeInsets.only(right: 10),
-            child: Text(widget.category, style: TextStyle(color: blackColor, fontSize: 18),),
+            child: Text(widget.category, style: Theme.of(context).textTheme.titleMedium,),
           ),
           Expanded(
             child: Container(
               padding: EdgeInsets.only(left: 10),
               alignment: Alignment.topLeft,
-              decoration: BoxDecoration(
-                border: Border(left: BorderSide()),
-              ),
               child: Wrap(
                 spacing: 10,
-                runSpacing: 10,
+                runSpacing: 5,
                 children: widget.optionList.map((String itemValue) {
-                  return UnconstrainedBox(
-                    child: SizedBox(
-                      height: 25,
-                      child: ChoiceChip(
-                        label: Align(
-                          alignment: Alignment(0, -0.5),
-                          child: Text(itemValue, style: TextStyle(
-                              fontSize: 16,
-                          ),),
-                        ),
-                        padding: EdgeInsets.zero,
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        selectedColor: ColorPalette.accentColors['yellow'],
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(color: blackColor),
-                        ),
-                        backgroundColor: whiteColor,
-                        shadowColor: Colors.transparent,
-                        showCheckmark: false,
-                        selected: widget.selectedValue == itemValue,
-                        onSelected: (_) {
-                          if(widget.selectedValue == itemValue) {
-                            setState(() {
-                              widget.selectedValue = null;
-                            });
-                          } else {
-                            setState(() {
-                              widget.selectedValue = itemValue;
-                            });
-                          }
-                        },
+                  return ChoiceChip(
+                    label: Text(
+                      itemValue,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: _selectedValue == itemValue ? whiteColor : blackColor,
                       ),
                     ),
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    selectedColor: ColorPalette.accentColors['blue'],
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(color: mediumGreyColor),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    backgroundColor: whiteColor,
+                    shadowColor: Colors.transparent,
+                    showCheckmark: false,
+                    selected: _selectedValue == itemValue,
+                    onSelected: (_) {
+                      if(_selectedValue == itemValue) {
+                        setState(() {
+                          _selectedValue = null;
+                        });
+                      } else {
+                        setState(() {
+                          _selectedValue = itemValue;
+                        });
+                      }
+                    },
                   );
                 }).toList(),
               ),

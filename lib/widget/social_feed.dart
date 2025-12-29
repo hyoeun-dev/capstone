@@ -8,13 +8,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SocialFeed extends StatefulWidget {
-  String name;
-  String title;
-  int index;
-  int heartIndex;
-  int days;
-  bool isLastContent;
-  SocialFeed({super.key, required this.name, required this.title, required this.index, required this.isLastContent, required this.heartIndex, required this.days});
+  final String name;
+  final String title;
+  final int index;
+  final int heartIndex;
+  final int days;
+  final bool isLastContent;
+  const SocialFeed({super.key, required this.name, required this.title, required this.index, required this.isLastContent, required this.heartIndex, required this.days});
 
   @override
   State<SocialFeed> createState() => _SocialFeedState();
@@ -29,59 +29,70 @@ class _SocialFeedState extends State<SocialFeed> {
 
     List<String> tags = ['학교', '문화'];
     return Container(
-      margin: EdgeInsets.only(top: 12),
+      margin: EdgeInsets.symmetric(vertical: kDefaultPadding / 2, horizontal: kDefaultPadding),
+      padding: const EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
-        border: (widget.isLastContent == false) ? Border(bottom: BorderSide(color: dividerColor)): Border.fromBorderSide(BorderSide.none)
+        border: Border.all(color: mediumGreyColor),
+        borderRadius: BorderRadius.circular(15),
+        color: whiteColor,
       ),
       child: Column(
         children: [
-          Row(
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-                margin: EdgeInsets.symmetric(horizontal: kDefaultPadding),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: blackColor.withAlpha(60),
-                ),
-                child: Icon(CupertinoIcons.person_fill),
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: kDefaultPadding),
-                child: Text(
-                  widget.name,
-                  style: TextStyle(color: blackColor, fontSize: 15),
-                ),
-              ),
-              Container(
-                height: 25,
-                margin: EdgeInsets.only(right: 10),
-                decoration: BoxDecoration(border: Border.all()),
-                child: DropdownButton(
-                  value: tags[widget.index],
-                  items: tags.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          value,
-                          style: TextStyle(color: blackColor, fontSize: 15),
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (value) {},
-                  dropdownColor: whiteColor,
-                  padding: EdgeInsets.symmetric(horizontal: 8),
-                  alignment: Alignment.center,
-                  iconSize: 0,
-                ),
-              ),
-            ],
-          ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+            padding: const EdgeInsets.symmetric(vertical: kDefaultPadding),
+            child: Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                  margin: EdgeInsets.only(right: kDefaultPadding),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: blackColor.withAlpha(60),
+                  ),
+                  child: Icon(CupertinoIcons.person_fill, color: whiteColor),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: kDefaultPadding),
+                  child: Text(
+                    widget.name,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+                Container(
+                  height: 35,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: mediumGreyColor),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton(
+                      value: tags[widget.index],
+                      items: tags.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              value,
+                              style: Theme.of(context).textTheme.bodyMedium,
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (value) {},
+                      dropdownColor: whiteColor,
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      alignment: Alignment.center,
+                      iconSize: 0,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Divider(thickness: 1),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10),
             child: TodoAccordionContents(
               title: widget.title,
               plannedDateTime: now,
@@ -89,28 +100,26 @@ class _SocialFeedState extends State<SocialFeed> {
               isBottomPaddingRequired: false,
             ),
           ),
+          Divider(thickness: 1),
           Padding(
-            padding: EdgeInsets.only(bottom: 10),
+            padding: EdgeInsets.only(top: 10),
             child: Row(
               children: [
                 BlocBuilder<SocialFavoriteCubit, SocialFavoriteState>(
                   builder: (context, state) {
                     bool isFavorite = state.currentFavorites[widget.heartIndex] ?? false;
 
-                    return Padding(
-                      padding: EdgeInsets.only(left: 12),
-                      child: GestureDetector(
-                        onTap: () {
-                          context.read<SocialFavoriteCubit>().toggleFavorites(widget.heartIndex);
-                        },
-                        child: (isFavorite == false)
-                            ? Icon(CupertinoIcons.heart, size: 25,)
-                            : Icon(CupertinoIcons.heart_fill, size: 25,),
-                      ),
+                    return GestureDetector(
+                      onTap: () {
+                        context.read<SocialFavoriteCubit>().toggleFavorites(widget.heartIndex);
+                      },
+                      child: (isFavorite == false)
+                          ? Icon(CupertinoIcons.heart, size: 25, color: blackColor,)
+                          : Icon(CupertinoIcons.heart_fill, size: 25, color: blackColor,),
                     );
                   }
                 ),
-                Padding(padding: EdgeInsets.only(left: 10), child: Icon(CupertinoIcons.bubble_left, size: 22,),),
+                Padding(padding: EdgeInsets.only(left: 10), child: Icon(CupertinoIcons.bubble_left, size: 22, color: blackColor,),),
               ],
             ),
           ),

@@ -3,7 +3,6 @@ import 'package:capstone/colors.dart';
 import 'package:capstone/constants.dart';
 import 'package:capstone/search/todo_search_choices.dart';
 import 'package:capstone/search/todo_search_period.dart';
-import 'package:capstone/widget/todo_accordion_categories.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

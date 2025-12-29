@@ -55,76 +55,77 @@ class _TodoContentsTextFieldState extends State<TodoContentsTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          margin: (widget.isBottomPaddingRequired) ? EdgeInsets.only(bottom: kDefaultPadding) : EdgeInsets.zero,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  width: 20,
-                  height: 30,
-                  margin: EdgeInsets.only(left: kDefaultPadding),
-                  child: Checkbox(
-                    value: isChecked,
-                    onChanged: (value) {
-                      setState(() {
-                        isChecked = value!;
-                      });
-                    },
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-                    side: BorderSide(width: 1.2),
-                    checkColor: whiteColor,
-                    activeColor: blackColor,
-                  ),
-                ),
-              ),
-              Column(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width - kDefaultHorizontalPadding * 3 - 20,
-                    height: 25,
-                    margin: EdgeInsets.only(left: kDefaultPadding, right: kDefaultPadding),
-                    alignment: Alignment.centerLeft,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Flexible(
-                          child: CupertinoTextField.borderless(
-                            padding: EdgeInsets.zero,
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        ),
-                        Text('D${(endDate != null) ? dateDifference(to: endDate!) : '-??'}', style: TextStyle(fontSize: 18),),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width - kDefaultHorizontalPadding * 3 - 20,
-                    height: 25,
-                    alignment: Alignment.centerLeft,
-                    child: RichText(text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: '수행일 ', style: TextStyle(fontSize: 16, color: blackColor),),
-                        TextSpan(
-                          text: getShortDate(widget.plannedDateTime.month,widget.plannedDateTime.day), style: TextStyle(fontSize: 16, color: blackColor)),
-                        TextSpan(
-                          text: ' | 마감일 ', style: TextStyle(fontSize: 16, color: blackColor),),
-                        TextSpan(
-                            text: (endDate == null) ? '선택' : dateFormat.format(endDate!), style: TextStyle(fontSize: 16, color: (isSelected == false) ? blackColor.withAlpha(150) : blackColor), recognizer: endDateTapRecognizer),
-                      ],
-                    )),
-                  ),
-                ],
-              ),
-            ],
+    return Padding( // Use Padding here for overall spacing
+      padding: EdgeInsets.only(
+        left: kDefaultPadding,
+        right: kDefaultPadding,
+        bottom: widget.isBottomPaddingRequired ? kDefaultPadding : 0,
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center, // Align items centrally
+        children: [
+          SizedBox(
+            width: 24, // Standard checkbox size
+            height: 24,
+            child: Checkbox(
+              value: isChecked,
+              onChanged: (value) {
+                setState(() {
+                  isChecked = value!;
+                });
+              },
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)), // Soften corners
+              side: BorderSide(width: 1.5, color: blackColor.withAlpha(179)),
+              checkColor: whiteColor,
+              activeColor: blackColor,
+            ),
           ),
-        ),
-      ],
+          SizedBox(width: kDefaultPadding), // Spacing between checkbox and text
+          Expanded( // Let content take available space
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded( // Allow CupertinoTextField to expand
+                      child: Container(
+                        height: 35, // Give it a fixed height for consistency
+                        padding: EdgeInsets.symmetric(horizontal: kDefaultPadding / 2),
+                        decoration: BoxDecoration(
+                          border: Border(bottom: BorderSide(color: mediumGreyColor)), // Bottom border
+                        ),
+                        child: CupertinoTextField.borderless(
+                          padding: EdgeInsets.zero,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                          placeholder: '할 일을 입력하세요',
+                          placeholderStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(color: blackColor.withAlpha(128)),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: kDefaultPadding), // Spacing between text field and D-day
+                    Text('D${(endDate != null) ? dateDifference(to: endDate!) : '-??'}', style: Theme.of(context).textTheme.bodyLarge),
+                  ],
+                ),
+                SizedBox(height: 4), // Small spacing between title and dates
+                RichText(text: TextSpan(
+                  style: Theme.of(context).textTheme.bodyMedium,
+                  children: [
+                    TextSpan(text: '수행일 '),
+                    TextSpan(text: getShortDate(widget.plannedDateTime.month,widget.plannedDateTime.day)),
+                    TextSpan(text: ' | 마감일 '),
+                    TextSpan(
+                        text: (endDate == null) ? '선택' : dateFormat.format(endDate!),
+                        style: TextStyle(color: (isSelected == false) ? blackColor.withAlpha(128) : blackColor),
+                        recognizer: endDateTapRecognizer
+                    ),
+                  ],
+                )),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -133,6 +134,5 @@ class _TodoContentsTextFieldState extends State<TodoContentsTextField> {
     endDateTapRecognizer.dispose();
     super.dispose();
   }
-
 }
 

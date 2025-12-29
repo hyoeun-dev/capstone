@@ -25,7 +25,6 @@ class _TodoScreenState extends State<TodoScreen> {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
-        backgroundColor: whiteColor,
         body: SafeArea(
           child: Column(
             children: [
@@ -44,10 +43,7 @@ class _TodoScreenState extends State<TodoScreen> {
               isNewContent = !isNewContent;
             });
           },
-          isExtended: true,
-          backgroundColor: ColorPalette.accentColors['light beige'],
-          shape: CircleBorder(),
-          child: Icon(CupertinoIcons.plus, color: blackColor,),
+          child: Icon(CupertinoIcons.plus, color: blackColor), // Reverted to original icon and color
         ),
       ),
     );

@@ -1,4 +1,3 @@
-import 'package:capstone/state/accordion_favorites_state.dart';
 import 'package:capstone/state/social_favorite_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

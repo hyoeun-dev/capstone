@@ -4,70 +4,71 @@ import 'package:flutter/material.dart';
 class ArchiveSearchChoices extends StatefulWidget {
   final String category;
   final List<String> optionList;
-  String? selectedValue;
-  bool isFavorite;
-  ArchiveSearchChoices({super.key, required this.category, required this.optionList, required this.selectedValue, required this.isFavorite});
+  final String? selectedValue;
+  final bool isFavorite;
+  const ArchiveSearchChoices({super.key, required this.category, required this.optionList, this.selectedValue, required this.isFavorite});
 
   @override
   State<ArchiveSearchChoices> createState() => _ArchiveSearchChoicesState();
 }
 
 class _ArchiveSearchChoicesState extends State<ArchiveSearchChoices> {
+  String? _selectedValue;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedValue = widget.selectedValue;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 8, right: 8, top: 10),
+      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           (widget.isFavorite == false) ? Container(
-            margin: EdgeInsets.only(right: 10),
-            child: Text(widget.category, style: TextStyle(color: blackColor, fontSize: 18),),
+            margin: EdgeInsets.only(right: 2),
+            child: Text(widget.category, style: Theme.of(context).textTheme.titleMedium,),
           ) : SizedBox(),
           Expanded(
             child: Container(
               padding: (widget.isFavorite == false) ? EdgeInsets.only(left: 10) : EdgeInsets.zero,
               alignment: Alignment.topLeft,
-              decoration: BoxDecoration(
-                border: (widget.isFavorite == false) ? Border(left: BorderSide()) : Border.fromBorderSide(BorderSide.none),
-              ),
               child: Wrap(
                 spacing: 10,
-                runSpacing: 10,
+                runSpacing: 5,
                 children: widget.optionList.map((String itemValue) {
-                  return UnconstrainedBox(
-                    child: SizedBox(
-                      height: 25,
-                      child: ChoiceChip(
-                        label: Align(
-                          alignment: Alignment(0, -0.5),
-                          child: Text(itemValue, style: TextStyle(
-                              fontSize: 16,
-                          ),),
-                        ),
-                        padding: EdgeInsets.zero,
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        selectedColor: ColorPalette.accentColors['yellow'],
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(color: blackColor),
-                        ),
-                        backgroundColor: whiteColor,
-                        shadowColor: Colors.transparent,
-                        showCheckmark: false,
-                        selected: widget.selectedValue == itemValue,
-                        onSelected: (_) {
-                          if(widget.selectedValue == itemValue) {
-                            setState(() {
-                              widget.selectedValue = null;
-                            });
-                          } else {
-                            setState(() {
-                              widget.selectedValue = itemValue;
-                            });
-                          }
-                        },
+                  return ChoiceChip(
+                    label: Text(
+                      itemValue,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: _selectedValue == itemValue ? whiteColor : blackColor,
                       ),
                     ),
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    selectedColor: ColorPalette.accentColors['blue'],
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(color: mediumGreyColor),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    backgroundColor: whiteColor,
+                    shadowColor: Colors.transparent,
+                    showCheckmark: false,
+                    selected: _selectedValue == itemValue,
+                    onSelected: (_) {
+                      if(_selectedValue == itemValue) {
+                        setState(() {
+                          _selectedValue = null;
+                        });
+                      } else {
+                        setState(() {
+                          _selectedValue = itemValue;
+                        });
+                      }
+                    },
                   );
                 }).toList(),
               ),

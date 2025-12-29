@@ -24,23 +24,23 @@ class Breadcrumbs extends StatelessWidget {
         children: [
           if (segments.isNotEmpty && segments.first == english) ...[
             InkWell(
-              onTap: () => context.go('/${english}'),
-              child: Text(korean, style: TextStyle(color: blackColor)),
+              onTap: () => context.go('/$english'),
               overlayColor: WidgetStatePropertyAll(Colors.transparent),
+              child: Text(korean, style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: blackColor)),
             ),
           ],
           for (int i = 1; i < segments.length; i++) ...[
             const Text(' > '),
             InkWell(
               onTap: () {
-                final path = '/' + segments.sublist(0, i + 1).join('/');
+                final path = '/${segments.sublist(0, i + 1).join('/')}';
                 context.go(path);
               },
+              overlayColor: WidgetStatePropertyAll(Colors.transparent),
               child: Text(
                 segmentsNames[segments[i].toLowerCase()]!,
-                style: TextStyle(color: blackColor),
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: blackColor),
               ),
-              overlayColor: WidgetStatePropertyAll(Colors.transparent),
             ),
           ],
         ],

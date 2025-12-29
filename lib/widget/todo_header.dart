@@ -12,51 +12,73 @@ class TodoHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        BlocBuilder<SortingDropdownCubit, SortingDropdownState>(
-          builder: (context, state) {
-            return Container(
-              width: 75,
-              height: 35,
-              margin: EdgeInsets.symmetric(horizontal: 8),
-              decoration: BoxDecoration(border: Border.all()),
-              child: DropdownButton(
-                value: context.watch<SortingDropdownCubit>().state.selectedSorting,
-                items: state.sortingMenu.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        value,
-                        style: TextStyle(color: blackColor, fontSize: 15),
-                      ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding, vertical: kDefaultPadding),
+      child: Row(
+        children: [
+          BlocBuilder<SortingDropdownCubit, SortingDropdownState>(
+            builder: (context, state) {
+              return Container(
+                width: 75,
+                height: 35,
+                decoration: BoxDecoration(
+                  border: Border.all(color: mediumGreyColor), // Full border
+                  borderRadius: BorderRadius.circular(8), // Soften corners
+                  color: whiteColor,
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton(
+                    value: context.watch<SortingDropdownCubit>().state.selectedSorting,
+                    items: state.sortingMenu.map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            value,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (String? value) {
+                      context.read<SortingDropdownCubit>().selectTag(value);
+                    },
+                    hint: Text(
+                      '정렬',
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
-                  );
-                }).toList(),
-                onChanged: (String? value) {
-                  context.read<SortingDropdownCubit>().selectTag(value);
-                },
-                hint: Text('정렬'),
-                dropdownColor: whiteColor,
-                padding: EdgeInsets.symmetric(horizontal: 8),
-                alignment: Alignment.center,
-                iconSize: 0,
+                    dropdownColor: whiteColor,
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    alignment: Alignment.center,
+                    iconSize: 0,
+                  ),
+                ),
+              );
+            },
+          ),
+          SizedBox(width: kDefaultPadding),
+          Expanded(
+            child: GestureDetector(
+              onTap: () => context.go('/todo/search'),
+              child: AbsorbPointer(
+                child: SizedBox(
+                  height: 35,
+                  child: CupertinoSearchTextField(
+                    placeholder: '검색',
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: mediumGreyColor),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    placeholderStyle: Theme.of(context).textTheme.bodySmall!.copyWith(color: blackColor.withAlpha(128), height: 1, fontSize: 13), // Adjusted size
+                  ),
+                ),
               ),
-            );
-          },
-        ),
-        GestureDetector(
-          onTap: () => context.go('/todo/search'),
-          child: AbsorbPointer(child: Container(
-            width: MediaQuery.of(context).size.width - kDefaultHorizontalPadding - 75,
-              padding: EdgeInsets.only(right: kDefaultPadding),
-              child: CupertinoSearchTextField(
-                placeholder: '검색',
-              ))),
-        ),
-      ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

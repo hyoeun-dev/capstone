@@ -6,6 +6,7 @@ final blackColor = Color(0xff444444);
 final whiteColor = Color(0xffF3F2EF);
 
 final dividerColor = Color(0xffdadada);
+final mediumGreyColor = Color(0xff858585);
 
 class ColorPalette {
   static const Map<String, Color> accentColors = {

@@ -2,7 +2,6 @@ import 'package:capstone/colors.dart';
 import 'package:capstone/widget/archive_accordion_categories.dart';
 import 'package:capstone/widget/archive_accordion_contents.dart';
 import 'package:capstone/widget/accordion_contents_header.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ArchiveAccordion extends StatefulWidget {
@@ -27,10 +26,7 @@ class _ArchiveAccordionState extends State<ArchiveAccordion> {
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      backgroundColor: whiteColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadiusGeometry.zero,
-                      ),
+                      // Rely on global theme
                       title: Row(
                         children: [
                           GestureDetector(
@@ -38,8 +34,8 @@ class _ArchiveAccordionState extends State<ArchiveAccordion> {
                               Navigator.pop(context);
                             },
                             child: Icon(
-                              CupertinoIcons.arrow_left,
-                              size: 20,
+                              Icons.arrow_back,
+                              size: 24,
                               color: blackColor,
                             ),
                           ),
@@ -47,11 +43,7 @@ class _ArchiveAccordionState extends State<ArchiveAccordion> {
                             padding: EdgeInsets.only(left: 15),
                             child: Text(
                               '취업 지원 혜택 모음집',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: blackColor,
-                              ),
+                              style: Theme.of(context).textTheme.titleMedium,
                             ),
                           ),
                         ],
@@ -75,10 +67,8 @@ class _ArchiveAccordionState extends State<ArchiveAccordion> {
                                       onPressed: () {
                                         /// todo 공유 바텀시트 띄우기
                                       },
-                                      isExtended: true,
-                                      shape: CircleBorder(),
-                                      backgroundColor: ColorPalette.accentColors['light beige'],
-                                      child: Icon(CupertinoIcons.person_2_fill, color: blackColor,),
+                                      // Rely on global theme
+                                      child: Icon(Icons.share, color: blackColor,),
                                     ),
                                   ),
                                 ],
